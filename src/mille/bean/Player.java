@@ -1,12 +1,15 @@
 package mille.bean;
 
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Player {
     private String name;
-    private Hand hand;
-    private milePile milePile;
-    private BattleAreaCards battleAreaCards;
-    private SpeedLimitAreaCards speedLimitAreaCards;
+    private ArrayList<Card> hand;
+    private ArrayList<Card> milePile;
+    private ArrayList<Card> battleAreaCards;
+    private ArrayList<Card> speedLimitAreaCards;
+    private ArrayList<Map<Card, Boolean>> safetyCards;
     
     public Player(String n)
     {
@@ -22,4 +25,13 @@ public class Player {
     {
         // program logic here
     }
+    
+    public int getTotalPoints()
+    {
+        // adds up all miles in milePile
+        // and other things that would give you points
+        return 0;
+    }
+    
+    
 }
