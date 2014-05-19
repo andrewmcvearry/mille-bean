@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-
 package mille.bean;
+
+import java.util.ArrayList;
 
 public class Deck
 {
