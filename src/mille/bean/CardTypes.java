@@ -112,3 +112,34 @@ public class RollCard extends RemedyCard
     }
 }
 
+public class DrivingAceCard extends SafetyCard
+{
+    public DrivingAceCard(CardImage image)
+    {
+        super("Driving Ace", image);
+    }
+}
+
+public class ExtraTankCard extends SafetyCard
+{
+    public ExtraTankCard(CardImage image)
+    {
+        super("Extra Tank", image);
+    }
+}
+
+public class PunctureProofCard extends SafetyCard
+{
+    public PunctureProofCard(CardImage image)
+    {
+        super("Punture-proof", image);
+    }
+}
+
+public class RightOfWayCard extends SafetyCard
+{
+    public RightOfWayCard(CardImage image)
+    {
+        super("Right of Way", image);
+    }
+}
