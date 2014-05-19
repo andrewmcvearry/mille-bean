@@ -15,3 +15,19 @@ public abstract class RemedyCard extends Card
         super(name, image);
     }
 }
+
+public abstract class SafetyCard extends Card
+{
+    public SafetyCard(String name, CardImage image)
+    {
+        super(name, image);
+    }
+}
+
+public abstract class DistanceCard extends Card
+{
+    public DistanceCard(String name, CardImage image)
+    {
+        super(name, image);
+    }
+}
