@@ -20,10 +20,14 @@ public class Deck
     public Card getTopCard()
     {
         // returns the card at the top of the cards ArrayList
+        return cards.get(cards.size() - 1);
     }
     
     public Card takeTopCard()
     {
         // returns the top card and removes it from the Deck
+        Card topCard = getTopCard();
+        cards.remove(cards.size() - 1);
+        return topCard;
     }
 }
