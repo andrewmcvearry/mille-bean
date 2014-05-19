@@ -143,3 +143,43 @@ public class RightOfWayCard extends SafetyCard
         super("Right of Way", image);
     }
 }
+
+public class Distance25Card extends DistanceCard
+{
+    public Distance25Card(CardImage image)
+    {
+        super("25 km", image);
+    }
+}
+
+public class Distance50Card extends DistanceCard
+{
+    public Distance50Card(CardImage image)
+    {
+        super("50 km", image);
+    }
+}
+
+public class Distance75Card extends DistanceCard
+{
+    public Distance75Card(CardImage image)
+    {
+        super("75 km", image);
+    }
+}
+
+public class Distance100Card extends DistanceCard
+{
+    public Distance100Card(CardImage image)
+    {
+        super("100 km", image);
+    }
+}
+
+public class Distance200Card extends DistanceCard
+{
+    public Distance200Card(CardImage image)
+    {
+        super("200 km", image);
+    }
+}
