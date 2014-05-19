@@ -8,6 +8,10 @@ public class Deck
     
     public Deck()
     {
+        // TODO: change this
+        CardImage defaultImage = new CardImage();
+        
+        cards.add(new AccidentCard(defaultImage));
         // fill in all Mille Bornes cards here
         // look on wikibook etc.
     }
