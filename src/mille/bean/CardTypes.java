@@ -71,3 +71,44 @@ public class StopCard extends HazardCard
         super("Stop", image);
     }
 }
+
+public class RepairsCard extends RemedyCard
+{
+    public RepairsCard(CardImage image)
+    {
+        super("Repairs", image);
+    }
+}
+
+public class GasolineCard extends RemedyCard
+{
+    public GasolineCard(CardImage image)
+    {
+        super("Gasoline", image);
+    }
+}
+
+public class SpareTireCard extends RemedyCard
+{
+    public SpareTireCard(CardImage image)
+    {
+        super("Spare Tire", image);
+    }
+}
+
+public class EndOfLimitCard extends RemedyCard
+{
+    public EndOfLimitCard(CardImage image)
+    {
+        super("End of Limit", image);
+    }
+}
+
+public class RollCard extends RemedyCard
+{
+    public RollCard(CardImage image)
+    {
+        super("Roll", image);
+    }
+}
+
