@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 package mille.bean;
 
 public class Deck
