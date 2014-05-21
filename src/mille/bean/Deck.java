@@ -1,6 +1,7 @@
 package mille.bean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck
 {
@@ -85,7 +86,8 @@ public class Deck
     
     public void shuffle()
     {
-        // rearrange all the cards in the deck
+        // rearranges all the cards in the deck
+        Collections.shuffle(cards);
     }
     
     public Card getTopCard()
