@@ -2,6 +2,7 @@ package mille.bean;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import mille.bean.cardtypes.*;
 
 public class Deck
 {
@@ -86,13 +87,13 @@ public class Deck
     
     public void shuffle()
     {
-        // rearranges all the cards in the deck
+        // rearranges all the cards in the Deck
         Collections.shuffle(cards);
     }
     
     public Card getTopCard()
     {
-        // returns the card at the top of the cards ArrayList
+        // returns the card at the top of the Deck
         return cards.get(cards.size() - 1);
     }
     
