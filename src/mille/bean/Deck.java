@@ -1,8 +1,8 @@
 package mille.bean;
 
-import mille.bean.CardTypes.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import mille.bean.CardTypes.*;
 
 public class Deck
 {
@@ -10,6 +10,8 @@ public class Deck
     
     public Deck()
     {
+        cards = new ArrayList<>();
+        
         // TODO: change this
         CardImage defaultImage = new CardImage();
         
