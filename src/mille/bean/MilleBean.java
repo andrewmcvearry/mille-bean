@@ -7,6 +7,7 @@ public class MilleBean {
      */
     public static void main(String[] args) {
         Deck milleDeck = new Deck();
+        milleDeck.shuffle();
     }
     
 }
