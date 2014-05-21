@@ -1,8 +1,8 @@
 package mille.bean;
 
+import mille.bean.CardTypes.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import mille.bean.cardtypes.*;
 
 public class Deck
 {
