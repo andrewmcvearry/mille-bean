@@ -11,6 +11,7 @@ public class Deck
         // TODO: change this
         CardImage defaultImage = new CardImage();
         
+        // constructs the deck by filling in all the card types
         for (int i = 0; i < 3; i++) {
             cards.add(new AccidentCard(defaultImage));
         }
@@ -80,9 +81,6 @@ public class Deck
         {
             cards.add(new Distance200Card(defaultImage));
         }
-        
-        // fill in all Mille Bornes cards here
-        // look on wikibook etc.
     }
     
     public void shuffle()
