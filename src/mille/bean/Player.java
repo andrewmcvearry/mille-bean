@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Player {
-    private String name;
+    private final String name;
     private ArrayList<Card> hand;
     private ArrayList<Card> milePile;
     private ArrayList<Card> battleAreaCards;
