@@ -8,6 +8,10 @@ public class Deck
 {
     private ArrayList<Card> cards;
     
+    /**
+     *  Builds the Deck by adding all the card types to the
+     *  cards ArrayList
+     */
     public Deck()
     {
         cards = new ArrayList<>();
