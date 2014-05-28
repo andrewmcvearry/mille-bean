@@ -22,18 +22,25 @@ public class Player {
         return name;
     }
     
-    public void playCardUpon(Card card)
+    public void playCardUpon(Card card) throws IllegalPlayException
     {
         if (playCardUponIsLegalMove(card))
         {
             if (card ins)
-        }
+                    
         if (card instanceof SpeedLimitCard)
         {
             if (playCardUponIsLegalMove(card))
             {
                 
             }
+        }
+        }
+
+        
+        else
+        {
+            throw new IllegalPlayException(card, "that is not a legal play");
         }
     }
     
