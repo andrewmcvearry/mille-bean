@@ -2,6 +2,7 @@ package mille.bean;
 
 import java.util.ArrayList;
 import java.util.Map;
+import mille.bean.CardTypes.*;
 
 public class Player {
     private final String name;
@@ -21,9 +22,27 @@ public class Player {
         return name;
     }
     
-    public void cardPlayed(Card card)
+    public void playCardUpon(Card card)
     {
-        // program logic here
+        if (playCardUponIsLegalMove(card))
+        {
+            if (card ins)
+        }
+        if (card instanceof SpeedLimitCard)
+        {
+            if (playCardUponIsLegalMove(card))
+            {
+                
+            }
+        }
+    }
+    
+    public boolean playCardUponIsLegalMove(Card card)
+    {
+        if (card instanceof SpeedLimitCard)
+        {
+            if
+        }
     }
     
     public int getTotalPoints()
