@@ -12,6 +12,9 @@ public class Player {
     private ArrayList<Card> speedLimitAreaCards;
     private ArrayList<Map<Card, Boolean>> safetyCards;
     
+    // needed to check for coup fourrees
+    private Card lastCardPlayedUpon;
+    
     public Player(String n)
     {
         name = n;
@@ -26,22 +29,44 @@ public class Player {
     {
         if (playCardUponIsLegalMove(card))
         {
-            if (card ins)
-                    
-        if (card instanceof SpeedLimitCard)
-        {
-            if (playCardUponIsLegalMove(card))
+            if (card instanceof SpeedLimitCard || card instanceof EndOfLimitCard)
             {
-                
+                speedLimitAreaCards.add(card);
             }
+            
+            // SpeedLimitCard and EndOfLimitCard can't be included here because
+            // they go in a separate pile.
+            if (card instanceof HazardCard || card instanceof RemedyCard &&
+                !(card instanceof SpeedLimitCard || card instanceof EndOfLimitCard))
+            {
+                battleAreaCards.add(card);
+            }
+            
+            if (card instanceof DistanceCard)
+            {
+                milePile.add(card);
+            }
+            
+            if (card instanceof SafetyCard)
+            {
+                if (lastCardPlayedUpon instanceof HazardCard)
+                {
+                    if (lastCardPlayedUpon instanceof StopCard || lastCardPlayedUpon instanceof SpeedLimitCard &&
+                        card instanceof RightOfWayCard)
+                    {
+                        safetyCards.add(new Map<true, card>);
+                    }
+                }
+            }
+            
         }
-        }
-
         
         else
         {
             throw new IllegalPlayException(card, "that is not a legal play");
         }
+        
+        lastCardPlayedUpon = card;
     }
     
     public boolean playCardUponIsLegalMove(Card card)
