@@ -1,7 +1,7 @@
 package mille.bean;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 import mille.bean.CardTypes.*;
 
 public class Player {
@@ -10,7 +10,7 @@ public class Player {
     private ArrayList<Card> milePile;
     private ArrayList<Card> battleAreaCards;
     private ArrayList<Card> speedLimitAreaCards;
-    private ArrayList<Map<Card, Boolean>> safetyCards;
+    private HashMap<Card, Boolean> safetyCards;
     
     // needed to check for coup fourrees
     private Card lastCardPlayedUpon;
@@ -54,11 +54,30 @@ public class Player {
                     if (lastCardPlayedUpon instanceof StopCard || lastCardPlayedUpon instanceof SpeedLimitCard &&
                         card instanceof RightOfWayCard)
                     {
-                        safetyCards.add(new Map<true, card>);
+                        safetyCards.put(card, true);
+                    }
+                    
+                    else if (lastCardPlayedUpon instanceof AccidentCard && card instanceof DrivingAceCard)
+                    {
+                        safetyCards.put(card,true);
+                    }
+                    
+                    else if (lastCardPlayedUpon instanceof OutOfGasCard && card instanceof ExtraTankCard)
+                    {
+                        safetyCards.put(card, true);
+                    }
+                    
+                    else if (lastCardPlayedUpon instanceof FlatTireCard && card instanceof PunctureProofCard)
+                    {
+                        safetyCards.put(card, true);
                     }
                 }
+                
+                else
+                {
+                    safetyCards.put(card, false);
+                }
             }
-            
         }
         
         else
@@ -73,7 +92,7 @@ public class Player {
     {
         if (card instanceof SpeedLimitCard)
         {
-            if
+            if ()
         }
     }
     
