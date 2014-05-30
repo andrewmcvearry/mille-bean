@@ -6,6 +6,6 @@ public class Distance50Card extends DistanceCard
 {
     public Distance50Card(CardImage image)
     {
-        super("50 km", image);
+        super("50 km", image, 50);
     }
 }

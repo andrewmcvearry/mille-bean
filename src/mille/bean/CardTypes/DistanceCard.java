@@ -4,8 +4,16 @@ import mille.bean.*;
 
 public abstract class DistanceCard extends Card
 {
-    public DistanceCard(String name, CardImage image)
+    private final int distanceValue;
+    
+    public DistanceCard(String name, CardImage image, int distValue)
     {
         super(name, image);
+        distanceValue = distValue;
+    }
+    
+    public int getDistanceValue()
+    {
+        return distanceValue;
     }
 }
