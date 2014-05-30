@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import mille.bean.CardTypes.*;
 
-public class Player {
+public abstract class Player {
     private final String name;
     private ArrayList<Card> hand;
     private ArrayList<Card> milePile;
@@ -168,7 +168,10 @@ public class Player {
     {
         // adds up all miles in milePile
         // and other things that would give you points
-        return 0;
+        
+        int totalDistance = getTotalDistance();
+        
+        return totalDistance;
     }
     
     
