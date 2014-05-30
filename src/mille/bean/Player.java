@@ -25,6 +25,11 @@ public abstract class Player {
         return name;
     }
     
+    public ArrayList<Card> getHand()
+    {
+        return hand;
+    }
+    
     public void playCardUpon(Card card) throws IllegalPlayException
     {
         if (playCardUponIsLegalMove(card))
@@ -174,5 +179,5 @@ public abstract class Player {
         return totalDistance;
     }
     
-    public abstract void chooseCard();
+    public abstract void playCard();
 }

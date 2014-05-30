@@ -8,7 +8,7 @@ public class ComputerPlayer extends Player
     }
     
     @Override
-    public void chooseCard()
+    public void playCard()
     {
         
     }
