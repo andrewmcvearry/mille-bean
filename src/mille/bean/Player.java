@@ -174,5 +174,5 @@ public abstract class Player {
         return totalDistance;
     }
     
-    
+    public abstract void chooseCard();
 }
