@@ -88,12 +88,80 @@ public class Player {
         lastCardPlayedUpon = card;
     }
     
+    @SuppressWarnings("empty-statement")
     public boolean playCardUponIsLegalMove(Card card)
     {
+        Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size());
+        Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size());
+        
         if (card instanceof SpeedLimitCard)
         {
-            if ()
+            // can't play one speed limit card on top of another
+            if (lastSpeedLimitCard instanceof SpeedLimitCard)
+            {
+                return false;
+            }
         }
+        
+        else if (card instanceof HazardCard)
+        {
+            // only time a hazard card can be played is when roll card is on top
+            if (!(lastBattleAreaCard instanceof RollCard))
+            {
+                return false;
+            }
+        }
+        
+        else if (card instanceof RemedyCard)
+        {
+            if (card instanceof RepairsCard && !(lastBattleAreaCard instanceof AccidentCard))
+            {
+                return false;
+            }
+            
+            else if (card instanceof GasolineCard && !(lastBattleAreaCard instanceof OutOfGasCard))
+            {
+                return false;
+            }
+            
+            else if (card instanceof SpareTireCard && !(lastBattleAreaCard instanceof FlatTireCard))
+            {
+                return false;
+            }
+            
+            else if (card instanceof RollCard && lastBattleAreaCard instanceof HazardCard)
+            {
+                return false;
+            }
+        }
+        
+        else if (card instanceof DistanceCard)
+        {
+            if (((DistanceCard)(card)).getDistanceValue() + getTotalDistance() > 1000)
+            {
+                return false;
+            }
+        }
+        
+        else if (card instanceof SafetyCard)
+        {
+            // a safety card can always be played
+            ;
+        }
+        
+        return true;
+    }
+    
+    public int getTotalDistance()
+    {
+        int totalDistance = 0;
+        
+        for (Card mileCard : milePile)
+        {
+            totalDistance += ((DistanceCard)(mileCard)).getDistanceValue();
+        }
+        
+        return totalDistance;
     }
     
     public int getTotalPoints()
