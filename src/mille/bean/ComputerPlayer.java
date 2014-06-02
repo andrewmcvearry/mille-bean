@@ -8,7 +8,7 @@ public class ComputerPlayer extends Player
     }
     
     @Override
-    public void playCardOn(int playerNum, Card card)
+    public void makePlay()
     {
         
     }

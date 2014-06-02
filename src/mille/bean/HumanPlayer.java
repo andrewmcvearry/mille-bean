@@ -8,8 +8,8 @@ public class HumanPlayer extends Player
     }
     
     @Override
-    public void playCardOn(int playerNum, Card card)
+    public void makePlay()
     {
-        
+        //
     }
 }

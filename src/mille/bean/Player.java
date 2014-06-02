@@ -31,7 +31,7 @@ public abstract class Player {
     }
     
     // Will be different for computer and human
-    public abstract void playCardOn(int playerNum, Card card);
+    public abstract void makePlay();
     
     public void receiveCard(Card card) throws IllegalPlayException
     {
