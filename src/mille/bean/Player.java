@@ -30,9 +30,12 @@ public abstract class Player {
         return hand;
     }
     
-    public void playCardUpon(Card card) throws IllegalPlayException
+    // Will be different for computer and human
+    public abstract void playCardOn(int playerNum, Card card);
+    
+    public void receiveCard(Card card) throws IllegalPlayException
     {
-        if (playCardUponIsLegalMove(card))
+        if (playIsLegalMove(card))
         {
             if (card instanceof SpeedLimitCard || card instanceof EndOfLimitCard)
             {
@@ -94,7 +97,7 @@ public abstract class Player {
     }
     
     @SuppressWarnings("empty-statement")
-    public boolean playCardUponIsLegalMove(Card card)
+    public boolean playIsLegalMove(Card card)
     {
         Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size());
         Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size());
@@ -178,6 +181,4 @@ public abstract class Player {
         
         return totalDistance;
     }
-    
-    public abstract void playCard();
 }
