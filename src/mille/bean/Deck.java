@@ -110,4 +110,9 @@ public class Deck
         cards.remove(cards.size() - 1);
         return topCard;
     }
+    
+    public boolean isEmpty()
+    {
+        return cards.isEmpty();
+    }
 }

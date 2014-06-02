@@ -1,5 +1,7 @@
 package mille.bean;
 
+import java.util.ArrayList;
+
 public class MilleBean {
 
     /**
@@ -20,6 +22,39 @@ public class MilleBean {
         ComputerPlayer computerPlayer2 = new ComputerPlayer(computerPlayer2Name);
         ComputerPlayer computerPlayer3 = new ComputerPlayer(computerPlayer3Name);
         
+        ArrayList<Player> players = new ArrayList<>();
+        
+        players.add(humanPlayer);
+        players.add(computerPlayer1);
+        players.add(computerPlayer2);
+        players.add(computerPlayer3);
+        
+        while (isGameOver(milleDeck, players))
+        {
+            for (Player player : players)
+            {
+                player.makePlay();
+                displayBoard();
+            }
+        }
     }
     
+    public static boolean isGameOver(Deck deck, ArrayList<Player> players)
+    {
+        if (deck.isEmpty())
+        {
+            return true;
+        }
+        else if(/*game conditions*/ false)
+        {
+            return true;
+        }
+        
+        return true;
+    }
+    
+    public static void displayBoard()
+    {
+        // graphics code goes here
+    }
 }
