@@ -32,14 +32,26 @@ public class MilleBean {
         players.add(computerPlayer2);
         players.add(computerPlayer3);
         
-        while (isGameOver(milleDeck, players))
-        {
-            for (Player player : players)
+        createDisplay();
+        
+        // MAIN LOOP
+        while (!Display.isCloseRequested())
+        { 
+            Display.update();
+            
+            while (isGameOver(milleDeck, players))
             {
-                player.makePlay();
-                displayBoard();
+                for (Player player : players)
+                {
+                    player.makePlay();
+                }
             }
+            
+            // end-of-game results and cleanup goes here
         }
+        
+        // end
+        Display.destroy();
     }
     
     public static boolean isGameOver(Deck deck, ArrayList<Player> players)
@@ -56,7 +68,7 @@ public class MilleBean {
         return true;
     }
     
-    public static void createBoard()
+    public static void createDisplay()
     {
         try
         {
@@ -68,10 +80,5 @@ public class MilleBean {
             e.printStackTrace();
             System.exit(0);
         }
-    }
-    
-    public static void displayBoard()
-    {
-        //graphics code
     }
 }
