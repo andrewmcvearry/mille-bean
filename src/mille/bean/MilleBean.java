@@ -1,7 +1,9 @@
 package mille.bean;
 
 import java.util.ArrayList;
+import java.lang.Character;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -39,15 +41,43 @@ public class MilleBean {
         { 
             Display.update();
             
-            while (isGameOver(milleDeck, players))
+            computerPlayer1.makePlay();
+            Display.update();
+            computerPlayer2.makePlay();
+            Display.update();
+            computerPlayer3.makePlay();
+
+            int cardNumber = -1;
+            int playerNumber = -1;
+            
+            boolean cardNumberObtained = false;
+            boolean bothNumbersObtained = false;
+            
+            while (!bothNumbersObtained)
             {
-                for (Player player : players)
+                while (Keyboard.next())
                 {
-                    player.makePlay();
+                    char character = Keyboard.getEventCharacter();
+
+                    // character has a numeric representation
+                    if (Character.getNumericValue(character) > 0)
+                    {
+                        if (!cardNumberObtained)
+                        {
+                            cardNumber = Character.getNumericValue(character);
+                            cardNumberObtained = true;
+                        }
+                        else
+                        {
+                            playerNumber = Character.getNumericValue(character);
+                            bothNumbersObtained = true;
+                        }
+                    }
                 }
             }
             
-            // end-of-game results and cleanup goes here
+            System.out.println("Card number:" + cardNumber);
+            System.out.println("Player number: " + playerNumber);
         }
         
         // end
