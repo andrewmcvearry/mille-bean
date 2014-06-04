@@ -1,6 +1,9 @@
 package mille.bean;
 
 import java.util.ArrayList;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 public class MilleBean {
 
@@ -53,8 +56,22 @@ public class MilleBean {
         return true;
     }
     
+    public static void createBoard()
+    {
+        try
+        {
+            Display.setDisplayMode(new DisplayMode(800, 600));
+            Display.create();
+        }
+        catch (LWJGLException e)
+        {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+    
     public static void displayBoard()
     {
-        // graphics code goes here
+        //graphics code
     }
 }
