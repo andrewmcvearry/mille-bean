@@ -1,7 +1,6 @@
 package mille.bean;
 
 import java.util.ArrayList;
-import java.lang.Character;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -53,29 +52,12 @@ public class MilleBean {
             boolean cardNumberObtained = false;
             boolean bothNumbersObtained = false;
             
-            while (!bothNumbersObtained)
-            {
-                while (Keyboard.next())
-                {
-                    char character = Keyboard.getEventCharacter();
-
-                    // character has a numeric representation
-                    if (Character.getNumericValue(character) > 0)
-                    {
-                        if (!cardNumberObtained)
-                        {
-                            cardNumber = Character.getNumericValue(character);
-                            cardNumberObtained = true;
-                        }
-                        else
-                        {
-                            playerNumber = Character.getNumericValue(character);
-                            bothNumbersObtained = true;
-                        }
-                    }
-                }
-            }
+            cardNumber = getNumberInput();
+            cardNumberObtained = true;
             
+            playerNumber = getNumberInput();
+            bothNumbersObtained = true;
+  
             System.out.println("Card number:" + cardNumber);
             System.out.println("Player number: " + playerNumber);
         }
@@ -110,5 +92,23 @@ public class MilleBean {
             e.printStackTrace();
             System.exit(0);
         }
+    }
+    
+    public static int getNumberInput()
+    {
+        // Keyboard.next() belongs somewhere in here
+        int numberValue = -1;
+        while (numberValue < 0)
+        {
+            char eventCharacter = Keyboard.getEventCharacter();
+
+            // if character has a numeric representation
+            if (Character.getNumericValue(eventCharacter) > 0)
+            {
+                numberValue = Character.getNumericValue(eventCharacter);
+            }
+        }
+        
+        return numberValue;
     }
 }
