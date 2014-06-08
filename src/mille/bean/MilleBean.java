@@ -46,17 +46,8 @@ public class MilleBean {
             Display.update();
             computerPlayer3.makePlay();
 
-            int cardNumber = -1;
-            int playerNumber = -1;
-            
-            boolean cardNumberObtained = false;
-            boolean bothNumbersObtained = false;
-            
-            cardNumber = getNumberInput();
-            cardNumberObtained = true;
-            
-            playerNumber = getNumberInput();
-            bothNumbersObtained = true;
+            int cardNumber = getNumberInput();
+            int playerNumber = getNumberInput();
   
             System.out.println("Card number:" + cardNumber);
             System.out.println("Player number: " + playerNumber);
