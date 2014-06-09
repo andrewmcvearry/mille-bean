@@ -3,8 +3,7 @@ package mille.bean;
 import java.util.ArrayList;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.*;
 
 public class MilleBean {
 
@@ -37,23 +36,25 @@ public class MilleBean {
         
         // MAIN LOOP
         while (!Display.isCloseRequested())
-        { 
-            Display.update();
-            
+        {
+            updateDisplay();
             computerPlayer1.makePlay();
-            Display.update();
+            updateDisplay();
             computerPlayer2.makePlay();
-            Display.update();
+            updateDisplay();
             computerPlayer3.makePlay();
+<<<<<<< HEAD
 
             int cardNumber = getNumberInput();
             int playerNumber = getNumberInput();
   
             System.out.println("Card number:" + cardNumber);
             System.out.println("Player number: " + playerNumber);
+=======
+            updateDisplay();
+            humanPlayer.makePlay();
+>>>>>>> move user input into HumanPlayer class and create a stub updateDisplay() method
         }
-        
-        // end
         Display.destroy();
     }
     
@@ -62,7 +63,7 @@ public class MilleBean {
         if (deck.isEmpty())
         {
             return true;
-        }
+        }      
         else if(/*game conditions*/ false)
         {
             return true;
@@ -70,7 +71,7 @@ public class MilleBean {
         
         return true;
     }
-    
+     
     public static void createDisplay()
     {
         try
@@ -85,21 +86,20 @@ public class MilleBean {
         }
     }
     
-    public static int getNumberInput()
+    public static void updateDisplay()
     {
-        // Keyboard.next() belongs somewhere in here
-        int numberValue = -1;
-        while (numberValue < 0)
-        {
-            char eventCharacter = Keyboard.getEventCharacter();
+        // Clear the screen and depth buffer
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-            // if character has a numeric representation
-            if (Character.getNumericValue(eventCharacter) > 0)
-            {
-                numberValue = Character.getNumericValue(eventCharacter);
-            }
-        }
-        
-        return numberValue;
+        // set the color of the quad (R,G,B,A)
+        GL11.glColor3f(0.5f, 0.5f, 1.0f);
+
+        // draw quad
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glVertex2f(100, 100);
+        GL11.glVertex2f(100 + 200, 100);
+        GL11.glVertex2f(100 + 200, 100 + 200);
+        GL11.glVertex2f(100, 100 + 200);
+        GL11.glEnd();
     }
 }
