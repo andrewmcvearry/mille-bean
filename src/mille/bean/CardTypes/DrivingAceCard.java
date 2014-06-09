@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class DrivingAceCard extends SafetyCard
 {
-    public DrivingAceCard(CardImage image)
+    public DrivingAceCard(String imagePath)
     {
-        super("Driving Ace", image);
+        super("Driving Ace", imagePath);
     }
 }

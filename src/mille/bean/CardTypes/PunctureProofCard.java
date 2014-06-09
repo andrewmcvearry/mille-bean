@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class PunctureProofCard extends SafetyCard
 {
-    public PunctureProofCard(CardImage image)
+    public PunctureProofCard(String imagePath)
     {
-        super("Punture-proof", image);
+        super("Puncture-proof", imagePath);
     }
 }

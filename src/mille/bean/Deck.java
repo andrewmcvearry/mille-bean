@@ -17,77 +17,77 @@ public class Deck
         cards = new ArrayList<>();
         
         // TODO: change this
-        CardImage defaultImage = new CardImage();
+        String imagePath = "";
         
         // constructs the deck by filling in all the card types
         for (int i = 0; i < 3; i++) {
-            cards.add(new AccidentCard(defaultImage));
+            cards.add(new AccidentCard(imagePath));
         }
         
         for (int i = 0; i < 3; i++) {
-            cards.add(new OutOfGasCard(defaultImage));
+            cards.add(new OutOfGasCard(imagePath));
         }
         
         for (int i = 0; i < 3; i++) {
-            cards.add(new FlatTireCard(defaultImage));
+            cards.add(new FlatTireCard(imagePath));
         }
         
         for (int i = 0; i < 4; i++) {
-            cards.add(new SpeedLimitCard(defaultImage));
+            cards.add(new SpeedLimitCard(imagePath));
         }
         
         for (int i = 0; i < 5; i++) {
-            cards.add(new StopCard(defaultImage));
+            cards.add(new StopCard(imagePath));
         }
         
         for (int i = 0; i < 6; i++) {
-            cards.add(new RepairsCard(defaultImage));
+            cards.add(new RepairsCard(imagePath));
         }
         
         for (int i = 0; i < 6; i++) {
-            cards.add(new GasolineCard(defaultImage));
+            cards.add(new GasolineCard(imagePath));
         }
         
         for (int i = 0; i < 6; i++) {
-            cards.add(new SpareTireCard(defaultImage));
+            cards.add(new SpareTireCard(imagePath));
         }
         
         for (int i = 0; i < 6; i++) {
-            cards.add(new EndOfLimitCard(defaultImage));
+            cards.add(new EndOfLimitCard(imagePath));
         }
         
         for (int i = 0; i < 14; i++) {
-            cards.add(new RollCard(defaultImage));
+            cards.add(new RollCard(imagePath));
         }
         
-        cards.add(new DrivingAceCard(defaultImage));
-        cards.add(new ExtraTankCard(defaultImage));
-        cards.add(new PunctureProofCard(defaultImage));
-        cards.add(new RightOfWayCard(defaultImage));
+        cards.add(new DrivingAceCard(imagePath));
+        cards.add(new ExtraTankCard(imagePath));
+        cards.add(new PunctureProofCard(imagePath));
+        cards.add(new RightOfWayCard(imagePath));
         
         for (int i = 0; i < 10; i++)
         {
-            cards.add(new Distance25Card(defaultImage));
-        }
-        
-        for (int i = 0; i < 10; i++)
-        {
-            cards.add(new Distance50Card(defaultImage));
+            cards.add(new Distance25Card(imagePath));
         }
         
         for (int i = 0; i < 10; i++)
         {
-            cards.add(new Distance75Card(defaultImage));
+            cards.add(new Distance50Card(imagePath));
+        }
+        
+        for (int i = 0; i < 10; i++)
+        {
+            cards.add(new Distance75Card(imagePath));
         }
         
         for (int i = 0; i < 12; i++)
         {
-            cards.add(new Distance100Card(defaultImage));
+            cards.add(new Distance100Card(imagePath));
         }
         
         for (int i = 0; i < 4; i++)
         {
-            cards.add(new Distance200Card(defaultImage));
+            cards.add(new Distance200Card(imagePath));
         }
     }
     

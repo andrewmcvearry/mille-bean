@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class SpeedLimitCard extends HazardCard
 {
-    public SpeedLimitCard(CardImage image)
+    public SpeedLimitCard(String imagePath)
     {
-        super("Speed Limit", image);
+        super("Speed Limit", imagePath);
     }
 }

@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class OutOfGasCard extends HazardCard
 {
-    public OutOfGasCard(CardImage image)
+    public OutOfGasCard(String imagePath)
     {
-        super("Out of Gas", image);
+        super("Out of Gas", imagePath);
     }
 }

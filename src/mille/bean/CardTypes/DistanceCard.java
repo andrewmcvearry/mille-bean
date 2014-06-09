@@ -6,9 +6,9 @@ public abstract class DistanceCard extends Card
 {
     private final int distanceValue;
     
-    public DistanceCard(String name, CardImage image, int distValue)
+    public DistanceCard(String name, String imagePath, int distValue)
     {
-        super(name, image);
+        super(name, imagePath);
         distanceValue = distValue;
     }
     

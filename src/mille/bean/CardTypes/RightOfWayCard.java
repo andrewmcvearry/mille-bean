@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class RightOfWayCard extends SafetyCard
 {
-    public RightOfWayCard(CardImage image)
+    public RightOfWayCard(String imagePath)
     {
-        super("Right of Way", image);
+        super("Right of Way", imagePath);
     }
 }

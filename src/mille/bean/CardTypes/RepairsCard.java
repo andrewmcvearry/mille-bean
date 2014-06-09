@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class RepairsCard extends RemedyCard
 {
-    public RepairsCard(CardImage image)
+    public RepairsCard(String imagePath)
     {
-        super("Repairs", image);
+        super("Repairs", imagePath);
     }
 }

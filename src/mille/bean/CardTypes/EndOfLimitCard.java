@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class EndOfLimitCard extends RemedyCard
 {
-    public EndOfLimitCard(CardImage image)
+    public EndOfLimitCard(String imagePath)
     {
-        super("End of Limit", image);
+        super("End of Limit", imagePath);
     }
 }

@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class ExtraTankCard extends SafetyCard
 {
-    public ExtraTankCard(CardImage image)
+    public ExtraTankCard(String imagePath)
     {
-        super("Extra Tank", image);
+        super("Extra Tank", imagePath);
     }
 }

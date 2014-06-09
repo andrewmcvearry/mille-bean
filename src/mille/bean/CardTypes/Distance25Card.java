@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class Distance25Card extends DistanceCard
 {
-    public Distance25Card(CardImage image)
+    public Distance25Card(String imagePath)
     {
-        super("25 km", image, 25);
+        super("25 km", imagePath, 25);
     }
 }

@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public abstract class HazardCard extends Card
 {
-    public HazardCard(String name, CardImage image)
+    public HazardCard(String name, String imagePath)
     {
-        super(name, image);
+        super(name, imagePath);
     }
 }

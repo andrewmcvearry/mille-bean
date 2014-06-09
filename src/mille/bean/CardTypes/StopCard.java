@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class StopCard extends HazardCard
 {
-    public StopCard(CardImage image)
+    public StopCard(String imagePath)
     {
-        super("Stop", image);
+        super("Stop", imagePath);
     }
 }

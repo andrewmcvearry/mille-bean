@@ -4,8 +4,8 @@ import mille.bean.*;
 
 public class RollCard extends RemedyCard
 {
-    public RollCard(CardImage image)
+    public RollCard(String imagePath)
     {
-        super("Roll", image);
+        super("Roll", imagePath);
     }
 }
