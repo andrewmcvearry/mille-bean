@@ -43,17 +43,8 @@ public class MilleBean {
             computerPlayer2.makePlay();
             updateDisplay();
             computerPlayer3.makePlay();
-<<<<<<< HEAD
-
-            int cardNumber = getNumberInput();
-            int playerNumber = getNumberInput();
-  
-            System.out.println("Card number:" + cardNumber);
-            System.out.println("Player number: " + playerNumber);
-=======
             updateDisplay();
             humanPlayer.makePlay();
->>>>>>> move user input into HumanPlayer class and create a stub updateDisplay() method
         }
         Display.destroy();
     }
