@@ -33,11 +33,11 @@ public class MilleBean {
         players.add(computerPlayer3);
         
         createDisplay();
+        updateDisplay();
         
         // MAIN LOOP
         while (!Display.isCloseRequested())
         {
-            updateDisplay();
             computerPlayer1.makePlay();
             updateDisplay();
             computerPlayer2.makePlay();
@@ -45,6 +45,7 @@ public class MilleBean {
             computerPlayer3.makePlay();
             updateDisplay();
             humanPlayer.makePlay();
+            updateDisplay();
         }
         Display.destroy();
     }
