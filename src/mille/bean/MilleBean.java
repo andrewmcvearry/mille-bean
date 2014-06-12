@@ -11,6 +11,7 @@ public class MilleBean {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        createDisplay();
         Deck milleDeck = new Deck();
         milleDeck.shuffle();
         
@@ -32,7 +33,6 @@ public class MilleBean {
         players.add(computerPlayer2);
         players.add(computerPlayer3);
         
-        createDisplay();
         updateDisplay();
         
         // MAIN LOOP
