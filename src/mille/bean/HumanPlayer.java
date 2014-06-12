@@ -18,28 +18,44 @@ public class HumanPlayer extends Player
     {
         int cardNumber = -1;
         int playerNumber = -1;
-
-        while (cardNumber == -1)
-        {
-            cardNumber = getNumberInput();
-        }
-
-        while (playerNumber == -1)
-        {
-            playerNumber = getNumberInput();
-        }
-
-        try
-        {
-            playerList.get(playerNumber - 1).receiveCard(getHand().get(cardNumber - 1));
-            hand.remove(cardNumber - 1);
-        }
-        catch (IllegalPlayException ex)
-        {
-            Logger.getLogger(HumanPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        }
         
+        boolean playSucceeded = false;
+        
+        while(!playSucceeded)
+        {
+            while (cardNumber == -1)
+            {
+                cardNumber = getNumberInput();
+            }
+
+            while (playerNumber == -1)
+            {
+                playerNumber = getNumberInput();
+            }
+
+            try
+            {
+                if (playerNumber == 5)
+                {
+                    // discard
+                    hand.remove(cardNumber - 1);
+                    playSucceeded = true;
+                }
+
+                else
+                {
+                    playerList.get(playerNumber - 1).receiveCard(getHand().get(cardNumber - 1));
+                    hand.remove(cardNumber - 1);
+                    playSucceeded = true;
+                }
+            }
+            catch (IllegalPlayException ex)
+            {
+                Logger.getLogger(HumanPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                cardNumber = -1;
+                playerNumber = -1;
+            }
+        }
     }
     
     private int getNumberInput()
@@ -57,11 +73,7 @@ public class HumanPlayer extends Player
                 // if character has a numeric representation
                 if (Character.getNumericValue(eventCharacter) > 0)
                 {
-                    // if number corresponds to a player
-                    if (Character.getNumericValue(eventCharacter) < 5)
-                    {
-                        return Character.getNumericValue(eventCharacter);
-                    }
+                    return Character.getNumericValue(eventCharacter);
                 }
             }
         }

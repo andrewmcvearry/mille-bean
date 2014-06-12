@@ -10,7 +10,7 @@ public abstract class Player {
     protected ArrayList<Card> milePile;
     protected ArrayList<Card> battleAreaCards;
     protected ArrayList<Card> speedLimitAreaCards;
-    protected HashMap<Card, Boolean> safetyCards;
+    protected ArrayList<Card> safetyCards;
     
     // needed to check for coup fourrees
     private Card lastCardPlayedUpon;
@@ -22,7 +22,7 @@ public abstract class Player {
         milePile = new ArrayList<>();
         battleAreaCards = new ArrayList<>();
         speedLimitAreaCards = new ArrayList<>();
-        safetyCards = new HashMap<>();
+        safetyCards = new ArrayList<>();
     }
     
     public String getName()
@@ -55,7 +55,7 @@ public abstract class Player {
         return null;
     }
     
-    public HashMap<Card, Boolean> getSafetyCards()
+    public ArrayList<Card> getSafetyCards()
     {
         return safetyCards;
     }
@@ -107,28 +107,33 @@ public abstract class Player {
                     if (lastCardPlayedUpon instanceof StopCard || lastCardPlayedUpon instanceof SpeedLimitCard &&
                         card instanceof RightOfWayCard)
                     {
-                        safetyCards.put(card, true);
+//                        safetyCards.put(card, true);
+                        safetyCards.add(card);
                     }
                     
                     else if (lastCardPlayedUpon instanceof AccidentCard && card instanceof DrivingAceCard)
                     {
-                        safetyCards.put(card,true);
+//                        safetyCards.put(card,true);
+                        safetyCards.add(card);
                     }
                     
                     else if (lastCardPlayedUpon instanceof OutOfGasCard && card instanceof ExtraTankCard)
                     {
-                        safetyCards.put(card, true);
+//                        safetyCards.put(card, true);
+                        safetyCards.add(card);
                     }
                     
                     else if (lastCardPlayedUpon instanceof FlatTireCard && card instanceof PunctureProofCard)
                     {
-                        safetyCards.put(card, true);
+//                        safetyCards.put(card, true);
+                        safetyCards.add(card);
                     }
                 }
                 
                 else
                 {
-                    safetyCards.put(card, false);
+//                    safetyCards.put(card, false);
+                    safetyCards.add(card);
                 }
             }
         }
@@ -147,10 +152,8 @@ public abstract class Player {
         {
             if (!speedLimitAreaCards.isEmpty())
             {
-                Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size() - 1);
-                
                 // can't play one speed limit card on top of another
-                if (lastSpeedLimitCard instanceof SpeedLimitCard)
+                if (getLastSpeedLimitAreaCard() instanceof SpeedLimitCard)
                 {
                     return false;
                 }
@@ -166,10 +169,8 @@ public abstract class Player {
             
             else
             {
-                Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
-                
                 // only time a hazard card can be played is when roll card is on top
-                if (!(lastBattleAreaCard instanceof RollCard))
+                if (!(getLastBattleAreaCard() instanceof RollCard))
                 {
                     return false;
                 }
@@ -182,12 +183,11 @@ public abstract class Player {
             {
                 return false;
             }
+            
             else
             {
-                Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size() - 1);
-                
                 // can't play one end of limit card on top of another
-                if (lastSpeedLimitCard instanceof EndOfLimitCard)
+                if (getLastSpeedLimitAreaCard() instanceof EndOfLimitCard)
                 {
                     return false;
                 }
@@ -196,31 +196,30 @@ public abstract class Player {
                 
         else if (card instanceof RemedyCard)
         {
-            if (battleAreaCards.isEmpty())
+            if (battleAreaCards.isEmpty() && !(card instanceof RollCard))
             {
                 return false;
             }
             
-            else
-            {
-                Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
-                
-                if (card instanceof RepairsCard && !(lastBattleAreaCard instanceof AccidentCard))
+            else if (!battleAreaCards.isEmpty())
+            {   
+                if (card instanceof RepairsCard && !(getLastBattleAreaCard() instanceof AccidentCard))
                 {
                     return false;
                 }
 
-                else if (card instanceof GasolineCard && !(lastBattleAreaCard instanceof OutOfGasCard))
+                else if (card instanceof GasolineCard && !(getLastBattleAreaCard() instanceof OutOfGasCard))
                 {
                     return false;
                 }
 
-                else if (card instanceof SpareTireCard && !(lastBattleAreaCard instanceof FlatTireCard))
+                else if (card instanceof SpareTireCard && !(getLastBattleAreaCard() instanceof FlatTireCard))
                 {
                     return false;
                 }
 
-                else if (card instanceof RollCard && lastBattleAreaCard instanceof HazardCard)
+                else if (card instanceof RollCard && !(getLastBattleAreaCard() instanceof StopCard
+                         || getLastBattleAreaCard() instanceof RemedyCard))
                 {
                     return false;
                 }
@@ -229,7 +228,11 @@ public abstract class Player {
         
         else if (card instanceof DistanceCard)
         {
-            if (((DistanceCard)(card)).getDistanceValue() + getTotalDistance() > 1000)
+            if (!(getLastBattleAreaCard() instanceof RollCard))
+            {
+                return false;
+            }
+            if (((DistanceCard)(card)).getDistanceValue() + getTotalDistance() > 700)
             {
                 return false;
             }
@@ -258,11 +261,35 @@ public abstract class Player {
     
     public int getTotalPoints()
     {
-        // adds up all miles in milePile
-        // and other things that would give you points
+        int totalPoints = getTotalDistance();
+        totalPoints += getSafetyCards().size() * 100;
         
-        int totalDistance = getTotalDistance();
+        if (getSafetyCards().size() == 4)
+        {
+            totalPoints += 700;
+        }
         
-        return totalDistance;
+        if (getTotalDistance() == 700)
+        {
+            totalPoints += 400;
+            
+            boolean distance200Played = false;
+            for (Card card : milePile)
+            {
+                if (card instanceof Distance200Card)
+                {
+                    distance200Played = true;
+                }
+            }
+            
+            if (distance200Played == false)
+            {
+                totalPoints += 300;
+            }
+            
+            // shutout...
+        }
+        
+        return totalPoints;
     }
 }

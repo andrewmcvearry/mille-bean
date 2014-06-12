@@ -111,6 +111,11 @@ public class Deck
         return topCard;
     }
     
+    public int size()
+    {
+        return cards.size();
+    }
+    
     public boolean isEmpty()
     {
         return cards.isEmpty();
