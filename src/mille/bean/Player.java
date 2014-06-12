@@ -35,6 +35,31 @@ public abstract class Player {
         return hand;
     }
     
+    public Card getLastBattleAreaCard()
+    {
+        if (!battleAreaCards.isEmpty())
+        {
+            return battleAreaCards.get(battleAreaCards.size() - 1);
+        }
+        
+        return null;
+    }
+    
+    public Card getLastSpeedLimitAreaCard()
+    {
+        if (!speedLimitAreaCards.isEmpty())
+        {
+            return speedLimitAreaCards.get(speedLimitAreaCards.size() - 1);
+        }
+        
+        return null;
+    }
+    
+    public HashMap<Card, Boolean> getSafetyCards()
+    {
+        return safetyCards;
+    }
+    
     // Different for computer and human
     public abstract void makePlay(ArrayList<Player> playerList);
     
@@ -65,18 +90,17 @@ public abstract class Player {
             
             // SpeedLimitCard and EndOfLimitCard can't be included here because
             // they go in a separate pile.
-            if (card instanceof HazardCard || card instanceof RemedyCard &&
-                !(card instanceof SpeedLimitCard || card instanceof EndOfLimitCard))
+            else if (card instanceof HazardCard || card instanceof RemedyCard)
             {
                 battleAreaCards.add(card);
             }
             
-            if (card instanceof DistanceCard)
+            else if (card instanceof DistanceCard)
             {
                 milePile.add(card);
             }
             
-            if (card instanceof SafetyCard)
+            else if (card instanceof SafetyCard)
             {
                 if (lastCardPlayedUpon instanceof HazardCard)
                 {
@@ -135,7 +159,12 @@ public abstract class Player {
         
         else if (card instanceof HazardCard)
         {
-            if (!battleAreaCards.isEmpty())
+            if (battleAreaCards.isEmpty())
+            {
+                return false;
+            }
+            
+            else
             {
                 Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
                 
@@ -147,9 +176,32 @@ public abstract class Player {
             }
         }
         
+        else if (card instanceof EndOfLimitCard)
+        {
+            if (speedLimitAreaCards.isEmpty())
+            {
+                return false;
+            }
+            else
+            {
+                Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size() - 1);
+                
+                // can't play one end of limit card on top of another
+                if (lastSpeedLimitCard instanceof EndOfLimitCard)
+                {
+                    return false;
+                }
+            }
+        }
+                
         else if (card instanceof RemedyCard)
         {
-            if (!battleAreaCards.isEmpty())
+            if (battleAreaCards.isEmpty())
+            {
+                return false;
+            }
+            
+            else
             {
                 Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
                 

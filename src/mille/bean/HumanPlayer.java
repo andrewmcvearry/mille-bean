@@ -29,9 +29,6 @@ public class HumanPlayer extends Player
             playerNumber = getNumberInput();
         }
 
-        System.out.println("Card number:" + cardNumber);
-        System.out.println("Player number: " + playerNumber);
-        
         try
         {
             playerList.get(playerNumber - 1).receiveCard(getHand().get(cardNumber - 1));
@@ -40,6 +37,7 @@ public class HumanPlayer extends Player
         catch (IllegalPlayException ex)
         {
             Logger.getLogger(HumanPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
         }
         
     }

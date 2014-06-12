@@ -110,16 +110,16 @@ public class MilleBean {
         text.bind();
         
         GL11.glBegin(GL11.GL_QUADS);
-                GL11.glTexCoord2f(0, 0);
-                GL11.glVertex2f(0, 0);
-                GL11.glTexCoord2f(1, 0);
-                GL11.glVertex2f(text.getTextureWidth(), 0);
-                GL11.glTexCoord2f(1, 1);
-                GL11.glVertex2f(text.getTextureWidth(), text.getTextureHeight());
-                GL11.glTexCoord2f(0, 1);
-                GL11.glVertex2f(0, text.getTextureHeight());
-            GL11.glEnd();
-        
+            GL11.glTexCoord2f(0, 0);
+            GL11.glVertex2f(0, 0);
+            GL11.glTexCoord2f(1, 0);
+            GL11.glVertex2f(text.getTextureWidth(), 0);
+            GL11.glTexCoord2f(1, 1);
+            GL11.glVertex2f(text.getTextureWidth(), text.getTextureHeight());
+            GL11.glTexCoord2f(0, 1);
+            GL11.glVertex2f(0, text.getTextureHeight());
+        GL11.glEnd();
+
         for (int i = 0; i < players.get(0).getHand().size(); i++)
         {
             Card nextCard = players.get(0).getHand().get(i);
@@ -139,7 +139,82 @@ public class MilleBean {
             GL11.glEnd();
         }
         
+        if (players.get(0).getLastBattleAreaCard() != null)
+        {
+            Texture battleTexture = players.get(0).getLastBattleAreaCard().getTexture();
+            battleTexture.bind();
+            
+            GL11.glBegin(GL11.GL_QUADS);
+                GL11.glTexCoord2f(0, 0);
+                GL11.glVertex2f(0, 200);
+                GL11.glTexCoord2f(1, 0);
+                GL11.glVertex2f(battleTexture.getTextureWidth(), 200);
+                GL11.glTexCoord2f(1, 1);
+                GL11.glVertex2f(battleTexture.getTextureWidth(), 200 + battleTexture.getTextureHeight());
+                GL11.glTexCoord2f(0, 1);
+                GL11.glVertex2f(0, 200 + battleTexture.getTextureHeight());
+            GL11.glEnd();
+        }
+        else
+        {
+            Texture emptyPile = null;
+            try {
+                emptyPile = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream((System.getProperty("user.dir") + "/images/EmptyPile.png")));
+            } catch (IOException ex) {
+                Logger.getLogger(MilleBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+             GL11.glBegin(GL11.GL_QUADS);
+                GL11.glTexCoord2f(0, 0);
+                GL11.glVertex2f(0, 200);
+                GL11.glTexCoord2f(1, 0);
+                GL11.glVertex2f(emptyPile.getTextureWidth(), 200);
+                GL11.glTexCoord2f(1, 1);
+                GL11.glVertex2f(emptyPile.getTextureWidth(), 200 + emptyPile.getTextureHeight());
+                GL11.glTexCoord2f(0, 1);
+                GL11.glVertex2f(0, 200 + emptyPile.getTextureHeight());
+            GL11.glEnd();
+        }
+        
+        if (players.get(0).getLastSpeedLimitAreaCard() != null)
+        {
+            Texture limitTexture = players.get(0).getLastSpeedLimitAreaCard().getTexture();
+            limitTexture.bind();
+            
+            GL11.glBegin(GL11.GL_QUADS);
+                GL11.glTexCoord2f(0, 0);
+                GL11.glVertex2f(128 + 6, 200);
+                GL11.glTexCoord2f(1, 0);
+                GL11.glVertex2f(128 + 6 + limitTexture.getTextureWidth(), 200);
+                GL11.glTexCoord2f(1, 1);
+                GL11.glVertex2f(128 + 6 + limitTexture.getTextureWidth(), 200 + limitTexture.getTextureHeight());
+                GL11.glTexCoord2f(0, 1);
+                GL11.glVertex2f(128 + 6, 200 + limitTexture.getTextureHeight());
+            GL11.glEnd();
+        }
+        else
+        {
+            Texture emptyPile = null;
+            try {
+                emptyPile = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream((System.getProperty("user.dir") + "/images/EmptyPile.png")));
+            } catch (IOException ex) {
+                Logger.getLogger(MilleBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            GL11.glBegin(GL11.GL_QUADS);
+                GL11.glTexCoord2f(0, 0);
+                GL11.glVertex2f(128 + 6, 200);
+                GL11.glTexCoord2f(1, 0);
+                GL11.glVertex2f(128 + 6 + emptyPile.getTextureWidth(), 200);
+                GL11.glTexCoord2f(1, 1);
+                GL11.glVertex2f(128 + 6 + emptyPile.getTextureWidth(), 200 + emptyPile.getTextureHeight());
+                GL11.glTexCoord2f(0, 1);
+                GL11.glVertex2f(128 + 6, 200 + emptyPile.getTextureHeight());
+            GL11.glEnd();
+        }
                 
         Display.update();
     }
+    
+//    public void renderImage(Texture texture,)
 }
