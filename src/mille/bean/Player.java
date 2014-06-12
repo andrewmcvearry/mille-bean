@@ -5,12 +5,12 @@ import java.util.HashMap;
 import mille.bean.CardTypes.*;
 
 public abstract class Player {
-    private final String name;
-    private ArrayList<Card> hand;
-    private ArrayList<Card> milePile;
-    private ArrayList<Card> battleAreaCards;
-    private ArrayList<Card> speedLimitAreaCards;
-    private HashMap<Card, Boolean> safetyCards;
+    protected final String name;
+    protected ArrayList<Card> hand;
+    protected ArrayList<Card> milePile;
+    protected ArrayList<Card> battleAreaCards;
+    protected ArrayList<Card> speedLimitAreaCards;
+    protected HashMap<Card, Boolean> safetyCards;
     
     // needed to check for coup fourrees
     private Card lastCardPlayedUpon;
@@ -18,6 +18,11 @@ public abstract class Player {
     public Player(String n)
     {
         name = n;
+        hand = new ArrayList<>();
+        milePile = new ArrayList<>();
+        battleAreaCards = new ArrayList<>();
+        speedLimitAreaCards = new ArrayList<>();
+        safetyCards = new HashMap<>();
     }
     
     public String getName()
@@ -30,8 +35,24 @@ public abstract class Player {
         return hand;
     }
     
-    // Will be different for computer and human
-    public abstract void makePlay();
+    // Different for computer and human
+    public abstract void makePlay(ArrayList<Player> playerList);
+    
+    public void take6Cards(Deck deck)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            hand.add(deck.takeTopCard());
+        }
+    }
+    
+    public void takeCard(Deck deck)
+    {
+        if (!deck.isEmpty())
+        {
+            hand.add(deck.takeTopCard());
+        }
+    }
     
     public void receiveCard(Card card) throws IllegalPlayException
     {
@@ -96,50 +117,61 @@ public abstract class Player {
         lastCardPlayedUpon = card;
     }
     
-    @SuppressWarnings("empty-statement")
     public boolean playIsLegalMove(Card card)
     {
-        Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size());
-        Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size());
-        
         if (card instanceof SpeedLimitCard)
         {
-            // can't play one speed limit card on top of another
-            if (lastSpeedLimitCard instanceof SpeedLimitCard)
+            if (!speedLimitAreaCards.isEmpty())
             {
-                return false;
+                Card lastSpeedLimitCard = speedLimitAreaCards.get(speedLimitAreaCards.size() - 1);
+                
+                // can't play one speed limit card on top of another
+                if (lastSpeedLimitCard instanceof SpeedLimitCard)
+                {
+                    return false;
+                }
             }
         }
         
         else if (card instanceof HazardCard)
         {
-            // only time a hazard card can be played is when roll card is on top
-            if (!(lastBattleAreaCard instanceof RollCard))
+            if (!battleAreaCards.isEmpty())
             {
-                return false;
+                Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
+                
+                // only time a hazard card can be played is when roll card is on top
+                if (!(lastBattleAreaCard instanceof RollCard))
+                {
+                    return false;
+                }
             }
         }
         
         else if (card instanceof RemedyCard)
         {
-            if (card instanceof RepairsCard && !(lastBattleAreaCard instanceof AccidentCard))
+            if (!battleAreaCards.isEmpty())
             {
-                return false;
-            }
-            
-            else if (card instanceof GasolineCard && !(lastBattleAreaCard instanceof OutOfGasCard))
-            {
-                return false;
-            }
-            
-            else if (card instanceof SpareTireCard && !(lastBattleAreaCard instanceof FlatTireCard))
-            {
-                return false;
-            }
-            
-            else if (card instanceof RollCard && lastBattleAreaCard instanceof HazardCard)
-            {
-                return false;
+                Card lastBattleAreaCard = battleAreaCards.get(battleAreaCards.size() - 1);
+                
+                if (card instanceof RepairsCard && !(lastBattleAreaCard instanceof AccidentCard))
+                {
+                    return false;
+                }
+
+                else if (card instanceof GasolineCard && !(lastBattleAreaCard instanceof OutOfGasCard))
+                {
+                    return false;
+                }
+
+                else if (card instanceof SpareTireCard && !(lastBattleAreaCard instanceof FlatTireCard))
+                {
+                    return false;
+                }
+
+                else if (card instanceof RollCard && lastBattleAreaCard instanceof HazardCard)
+                {
+                    return false;
+                }
             }
         }
         
@@ -154,7 +186,7 @@ public abstract class Player {
         else if (card instanceof SafetyCard)
         {
             // a safety card can always be played
-            ;
+            
         }
         
         return true;

@@ -7,8 +7,8 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public abstract class Card
 {
-    private final String name;
-    private final Texture texture;
+    private String name;
+    private Texture texture;
     
     public Card(String cardName, String path)
     {

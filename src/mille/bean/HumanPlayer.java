@@ -1,5 +1,8 @@
 package mille.bean;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
@@ -11,7 +14,7 @@ public class HumanPlayer extends Player
     }
     
     @Override
-    public void makePlay()
+    public void makePlay(ArrayList<Player> playerList)
     {
         int cardNumber = -1;
         int playerNumber = -1;
@@ -27,7 +30,18 @@ public class HumanPlayer extends Player
         }
 
         System.out.println("Card number:" + cardNumber);
-        System.out.println("Player number: " + playerNumber); 
+        System.out.println("Player number: " + playerNumber);
+        
+        try
+        {
+            playerList.get(playerNumber - 1).receiveCard(getHand().get(cardNumber - 1));
+            hand.remove(cardNumber - 1);
+        }
+        catch (IllegalPlayException ex)
+        {
+            Logger.getLogger(HumanPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     private int getNumberInput()
@@ -45,7 +59,11 @@ public class HumanPlayer extends Player
                 // if character has a numeric representation
                 if (Character.getNumericValue(eventCharacter) > 0)
                 {
-                    return Character.getNumericValue(eventCharacter);
+                    // if number corresponds to a player
+                    if (Character.getNumericValue(eventCharacter) < 5)
+                    {
+                        return Character.getNumericValue(eventCharacter);
+                    }
                 }
             }
         }

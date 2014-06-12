@@ -1,5 +1,7 @@
 package mille.bean;
 
+import java.util.ArrayList;
+
 public class ComputerPlayer extends Player
 {
     public ComputerPlayer(String n)
@@ -8,7 +10,7 @@ public class ComputerPlayer extends Player
     }
     
     @Override
-    public void makePlay()
+    public void makePlay(ArrayList<Player> players)
     {
         
     }
