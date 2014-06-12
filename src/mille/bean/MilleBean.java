@@ -1,10 +1,14 @@
 package mille.bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 public class MilleBean {
 
@@ -93,9 +97,28 @@ public class MilleBean {
     
     public static void updateDisplay(ArrayList<Player> players)
     {
-        // Clear the screen and depth buffer
         GL11.glClearColor(0.0f, 0.5f, 0.0f, 0.0f);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        
+        Texture text = null;
+        try {
+            text = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("/home/andrew/Desktop/you.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MilleBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        text.bind();
+        
+        GL11.glBegin(GL11.GL_QUADS);
+                GL11.glTexCoord2f(0, 0);
+                GL11.glVertex2f(0, 0);
+                GL11.glTexCoord2f(1, 0);
+                GL11.glVertex2f(text.getTextureWidth(), 0);
+                GL11.glTexCoord2f(1, 1);
+                GL11.glVertex2f(text.getTextureWidth(), text.getTextureHeight());
+                GL11.glTexCoord2f(0, 1);
+                GL11.glVertex2f(0, text.getTextureHeight());
+            GL11.glEnd();
         
         for (int i = 0; i < players.get(0).getHand().size(); i++)
         {
@@ -106,22 +129,17 @@ public class MilleBean {
             
             GL11.glBegin(GL11.GL_QUADS);
                 GL11.glTexCoord2f(0, 0);
-                GL11.glVertex2f(i * 100, 0);
+                GL11.glVertex2f(i * 64, 0);
                 GL11.glTexCoord2f(1, 0);
-                GL11.glVertex2f(i * 100 + texture.getTextureWidth(), 0);
+                GL11.glVertex2f(i * 64 + texture.getTextureWidth(), 0);
                 GL11.glTexCoord2f(1, 1);
-                GL11.glVertex2f(i * 100 + texture.getTextureWidth(), texture.getTextureHeight());
+                GL11.glVertex2f(i * 64 + texture.getTextureWidth(), texture.getTextureHeight());
                 GL11.glTexCoord2f(0, 1);
-                GL11.glVertex2f(i * 100, texture.getTextureHeight());
+                GL11.glVertex2f(i * 64, texture.getTextureHeight());
             GL11.glEnd();
         }
         
-        Texture texture = players.get(0).getHand().get(0).getTexture();
-        
-        texture.bind();
-        
-
-        
+                
         Display.update();
     }
 }

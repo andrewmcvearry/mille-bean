@@ -1,14 +1,16 @@
 package mille.bean;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public abstract class Card
 {
-    private String name;
-    private Texture texture;
+    private final String name;
+    private final Texture texture;
     
     public Card(String cardName, String path)
     {
@@ -32,9 +34,9 @@ public abstract class Card
         {
             return TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(path));
         }
-        catch (IOException e)
+        catch (IOException ex)
         {
-            e.printStackTrace();
+            Logger.getLogger(MilleBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return null;
